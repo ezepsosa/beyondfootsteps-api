@@ -17,7 +17,7 @@ import lombok.Setter;
 public class IdpDisplacement {
 
     @Id
-    private int idIdpidmc;
+    private String idIdpidmc;
 
     private int year;
 
