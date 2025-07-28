@@ -28,12 +28,11 @@ public class IdpReturnees {
 
     private String countryOfOrigin;
 
-    @Column(name="idp_returnees")
+    @Column(name = "idp_returnees")
     private int idpReturneesNumber;
 
     private int refugeesReturnees;
 
     private LocalDate byDate;
-
 
 }
