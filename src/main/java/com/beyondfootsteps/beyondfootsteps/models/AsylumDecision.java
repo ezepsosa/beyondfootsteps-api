@@ -1,5 +1,6 @@
 package com.beyondfootsteps.beyondfootsteps.models;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "asylum_decisions_kpi")
 public class AsylumDecision {
-
+    
+    @Id
     private String idAsylumdecisions;
 
     private int year;

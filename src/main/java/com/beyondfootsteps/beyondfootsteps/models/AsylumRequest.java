@@ -14,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "asylum_requests_kpi")
 public class AsylumRequest {
+    
     private int year;
 
     private String countryOfOriginIso;
