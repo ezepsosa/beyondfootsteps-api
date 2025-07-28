@@ -20,7 +20,7 @@ import lombok.Setter;
 public class IdpReturnees {
 
     @Id
-    private String idIdpreturnees;
+    private String id;
 
     private int year;
 

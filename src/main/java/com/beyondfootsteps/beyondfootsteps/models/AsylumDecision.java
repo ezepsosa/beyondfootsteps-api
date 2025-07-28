@@ -17,7 +17,7 @@ import lombok.Setter;
 public class AsylumDecision {
     
     @Id
-    private String idAsylumdecisions;
+    private String id;
 
     private int year;
 

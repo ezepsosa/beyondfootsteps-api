@@ -17,7 +17,7 @@ import lombok.Setter;
 public class RefugeeNaturalization {
 
     @Id
-    private String idRefugeenaturalization;
+    private String id;
 
     private int year;
 

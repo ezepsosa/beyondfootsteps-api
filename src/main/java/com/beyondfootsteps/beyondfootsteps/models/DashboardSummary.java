@@ -1,6 +1,7 @@
 package com.beyondfootsteps.beyondfootsteps.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,9 @@ import lombok.Setter;
 @Table(name = "dashboard_summary_kpi")
 public class DashboardSummary {
 
+    @Id
+    private String id;
+    
     private int year;
 
     private String countryIso;
