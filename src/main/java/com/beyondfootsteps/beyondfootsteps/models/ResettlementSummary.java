@@ -1,19 +1,23 @@
 package com.beyondfootsteps.beyondfootsteps.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "resettlement_sumamry_kpi")
 public class ResettlementSummary {
+
+    @Id
+    private String id;
 
     private int year;
 

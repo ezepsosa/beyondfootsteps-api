@@ -1,14 +1,14 @@
 package com.beyondfootsteps.beyondfootsteps.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +17,7 @@ import lombok.Setter;
 public class AsylumDecision {
     
     @Id
-    private String idAsylumdecisions;
+    private String id;
 
     private int year;
 
