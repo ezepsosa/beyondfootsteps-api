@@ -31,14 +31,3 @@ public class AsylumRequest {
 
 
 }
-
-/*
- * year
-population
-country_of_origin_iso
-country_of_origin
-country_of_asylum_iso
-country_of_asylum
-applied_per_100k
-applied
- */
