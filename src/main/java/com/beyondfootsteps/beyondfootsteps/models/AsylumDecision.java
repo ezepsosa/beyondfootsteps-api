@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "asylum_decisions_kpi") 
+@Table(name = "asylum_decisions_kpi")
 public class AsylumDecision {
 
     private String idAsylumdecisions;
@@ -21,11 +21,11 @@ public class AsylumDecision {
 
     private String countryOfOrigin;
 
-    private String countryOfOriginISO;
+    private String countryOfOriginIso;
 
     private String countryOfAsylum;
 
-    private String countryOfAsylumISO;
+    private String countryOfAsylumIso;
 
     private int decRecognized;
 

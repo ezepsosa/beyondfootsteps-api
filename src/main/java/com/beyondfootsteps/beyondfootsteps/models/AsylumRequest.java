@@ -8,26 +8,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Table(name="asylum_requests_kpi")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "asylum_requests_kpi")
 public class AsylumRequest {
     private int year;
 
-    private String countryOfOriginISO;
+    private String countryOfOriginIso;
 
     private String countryOfOrigin;
 
-    private String countryOfAsylumISO;
-    
+    private String countryOfAsylumIso;
+
     private String countryOfAsylum;
 
     private float appliedPer100k;
 
     private int applied;
-
-
 
 }
