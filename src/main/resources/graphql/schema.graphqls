@@ -1,0 +1,106 @@
+type AsylumDecision {
+  id: ID!
+  year: Int
+  countryOfOrigin: String
+  countryOfOriginIso: String
+  countryOfAsylum: String
+  countryOfAsylumIso: String
+  decRecognized: Int
+  decOther: Int
+  decRejected: Int
+  decClosed: Int
+  decTotal: Int
+  acceptanceRate: Float
+  intakeDate: Int
+}
+
+type AsylumRequest {
+  id: ID!
+  year: Int
+  countryOfOrigin: String
+  countryOfOriginIso: String
+  countryOfAsylum: String
+  countryOfAsylumIso: String
+  appliedPer100k: Float
+  applied: Int
+}
+
+type DashboardSummary {
+  id: ID!
+  year: Int
+  countryIso: String
+  totalApplied: Int
+  appliedPer100k: Float
+  acceptanceRate: Float
+  internalDisplacementTotal: Int
+  displacementRatePer100k: Float
+  idpReturnees: Int
+  refugeesReturnees: Int
+  naturalizationsTotal: Int
+  naturalizationChange: Float
+  resettlementRequests: Int
+  resettlementDepartures: Int
+  resettlementSubmissions: Int
+  resettlementNeeds: Int
+  resettlementGap: Float
+  coverageRate: Float
+  requestVsNeedsRatio: Float
+  submissionsEfficiency: Float
+  realizationRate: Float
+}
+
+type idpDisplacement {
+  id: ID!
+  year: Int
+  countryOfOrigin: String
+  countryOfOriginIso: String
+  displacementRatePer100k: Float
+  total: Int
+}
+
+type idpReturnees {
+  id: ID!
+  year: Int
+  countryOfOriginIso: String
+  countryOfOrigin: String
+  idpReturneesNumber: Int
+  refugeesReturnees: Int
+  byDate: String
+}
+
+type RefugeeNaturalization {
+  id: ID!
+  year: Int
+  countryOfOrigin: String
+  countryOfOriginIso: String
+  countryOfAsylum: String
+  countryOfAsylumIso: String
+  total: Int
+  intakeDate: Int
+  naturalizationChange: Float
+}
+
+type ResettlementSummary {
+  id: ID!
+  year: Int
+  countryIso: String
+  totalRequests: Int
+  totalDepartures: Int
+  totalSubmissions: Int
+  totalNeeds: Int
+  totalGaps: Float
+  coverageRate: Float
+  requestVsNeedsRatio: Float
+  submissionsEfficiency: Float
+  realizationRate: Float
+}
+
+type Query {
+  asylumDecisions: [AsylumDecision]
+  asylumRequests: [AsylumRequest]
+  dashboardSummaries: [DashboardSummary]
+  idpDisplacements: [idpDisplacement]
+  idpReturnees: [idpReturnees]
+  refugeeNaturalizations: [RefugeeNaturalization]
+  resettlementSummaries: [ResettlementSummary]
+}

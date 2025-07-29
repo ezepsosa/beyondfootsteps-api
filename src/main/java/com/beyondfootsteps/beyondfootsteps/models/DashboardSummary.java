@@ -1,5 +1,6 @@
 package com.beyondfootsteps.beyondfootsteps.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,45 +19,47 @@ public class DashboardSummary {
 
     @Id
     private String id;
-    
-    private int year;
+
+    private Integer year;
 
     private String countryIso;
 
-    private int totalApplied;
+    private Integer totalApplied;
 
-    private float appliedPer100k;
+    @Column(name = "applied_per_100k")
+    private Float appliedPer100k;
 
-    private float acceptanceRate;
+    private Float acceptanceRate;
 
-    private int internalDisplacementTotal;
+    private Integer internalDisplacementTotal;
 
-    private float displacementRatePer100k;
+    @Column(name = "displacement_rate_per_100k")
+    private Float displacementRatePer100k;
 
-    private int idpReturnees;
+    private Integer idpReturnees;
 
-    private int refugeesReturnees;
+    private Integer refugeesReturnees;
 
-    private int naturalizationsTotal;
+    private Integer naturalizationsTotal;
 
-    private float naturalizationChange;
+    private Float naturalizationChange;
 
-    private int resettlementRequests;
+    private Integer resettlementRequests;
 
-    private int resettlementDepartures;
+    private Integer resettlementDepartures;
 
-    private int resettlementSubmissions;
+    private Integer resettlementSubmissions;
 
-    private int resettlementNeeds;
+    private Integer resettlementNeeds;
 
-    private float resettlementGaps;
+    private Float resettlementGap;
 
-    private float coverageRate;
+    private Float coverageRate;
 
-    private float requestVsNeedsRatio;
+    private Float requestVsNeedsRatio;
 
-    private float submissionsEfficiency;
+    private Float submissionsEfficiency;
 
-    private float realizationRate;
+    private Float realizationRate;
 
 }

@@ -19,7 +19,7 @@ public class RefugeeNaturalization {
     @Id
     private String id;
 
-    private int year;
+    private Integer year;
 
     private String countryOfOrigin;
 
@@ -29,11 +29,11 @@ public class RefugeeNaturalization {
 
     private String countryOfAsylumIso;
 
-    private int total;
+    private Integer total;
 
-    private int intakeDate;
+    private Integer intakeDate;
 
-    private float naturalizationChange;
+    private Float naturalizationChange;
     
 
 }

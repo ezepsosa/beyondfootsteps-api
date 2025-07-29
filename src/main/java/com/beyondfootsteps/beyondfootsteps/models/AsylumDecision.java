@@ -15,11 +15,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "asylum_decisions_kpi")
 public class AsylumDecision {
-    
+
     @Id
     private String id;
 
-    private int year;
+    private Integer year;
 
     private String countryOfOrigin;
 
@@ -29,17 +29,17 @@ public class AsylumDecision {
 
     private String countryOfAsylumIso;
 
-    private int decRecognized;
+    private Integer decRecognized;
 
-    private int decOther;
+    private Integer decOther;
 
-    private int decRejected;
+    private Integer decRejected;
 
-    private int decClosed;
+    private Integer decClosed;
 
-    private int decTotal;
+    private Integer decTotal;
 
-    private float acceptanceRate;
+    private Float acceptanceRate;
 
-    private int intakeDate;
+    private Integer intakeDate;
 }
