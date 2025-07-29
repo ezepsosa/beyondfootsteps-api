@@ -13,13 +13,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "resettlement_sumamry_kpi")
+@Table(name = "resettlements_summary_kpi")
 public class ResettlementSummary {
 
     @Id
     private String id;
 
-    private int year;
+    private Integer year;
 
     private String countryOfOriginIso;
 
@@ -31,25 +31,25 @@ public class ResettlementSummary {
 
     private String countryOfResettlementIso;
 
-    private String countryOfResettlemen;
+    private String countryOfResettlement;
 
-    private int cases;
+    private Integer cases;
 
-    private int persons;
+    private Integer persons;
 
-    private int departuresTotal;
+    private Integer departuresTotal;
 
-    private int totalNeeds;
+    private Integer totalNeeds;
 
-    private int submissionsTotal;
+    private Integer submissionsTotal;
 
-    private int resettlementGap;
+    private Integer resettlementGap;
 
-    private float coverageRate;
+    private Float coverageRate;
 
-    private float requestVsNeedsRatio;
+    private Float requestVsNeedsRatio;
 
-    private float submissionsEfficiency;
+    private Float submissionsEfficiency;
 
-    private float realizationRate;
+    private Float realizationRate;
 }

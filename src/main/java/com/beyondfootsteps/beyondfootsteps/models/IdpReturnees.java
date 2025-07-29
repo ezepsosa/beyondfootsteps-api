@@ -22,16 +22,16 @@ public class IdpReturnees {
     @Id
     private String id;
 
-    private int year;
+    private Integer year;
 
     private String countryOfOriginIso;
 
     private String countryOfOrigin;
 
     @Column(name = "idp_returnees")
-    private int idpReturneesNumber;
+    private Integer idpReturneesNumber;
 
-    private int refugeesReturnees;
+    private Integer refugeesReturnees;
 
     private LocalDate byDate;
 
