@@ -29,6 +29,7 @@ type DashboardSummary {
   id: ID!
   year: Int
   countryIso: String
+  country: String
   totalApplied: Int
   appliedPer100k: Float
   acceptanceRate: Float
@@ -103,4 +104,7 @@ type Query {
   idpReturnees: [IdpReturnees]
   refugeeNaturalizations: [RefugeeNaturalization]
   resettlementSummaries: [ResettlementSummary]
+
+  # Queries with filters
+  dashboardSummariesByYear(year: Int!): [DashboardSummary]
 }
