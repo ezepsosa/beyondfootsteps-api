@@ -21,6 +21,7 @@ type AsylumRequest {
   countryOfOriginIso: String
   countryOfAsylum: String
   countryOfAsylumIso: String
+  appPc: Boolean
   appliedPer100k: Float
   applied: Int
 }
@@ -107,4 +108,5 @@ type Query {
 
   # Queries with filters
   dashboardSummariesByYear(year: Int!): [DashboardSummary]
+  asylumRequestsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumRequest]
 }
