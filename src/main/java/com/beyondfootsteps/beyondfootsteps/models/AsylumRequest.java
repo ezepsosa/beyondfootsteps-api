@@ -30,6 +30,8 @@ public class AsylumRequest {
 
     private String countryOfAsylum;
 
+    private Boolean appPc;
+
     @Column(name = "applied_per_100k")
     private Float appliedPer100k;
 

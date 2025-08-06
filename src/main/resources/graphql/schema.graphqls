@@ -21,6 +21,7 @@ type AsylumRequest {
   countryOfOriginIso: String
   countryOfAsylum: String
   countryOfAsylumIso: String
+  appPc: Boolean
   appliedPer100k: Float
   applied: Int
 }
@@ -29,6 +30,7 @@ type DashboardSummary {
   id: ID!
   year: Int
   countryIso: String
+  country: String
   totalApplied: Int
   appliedPer100k: Float
   acceptanceRate: Float
@@ -103,4 +105,8 @@ type Query {
   idpReturnees: [IdpReturnees]
   refugeeNaturalizations: [RefugeeNaturalization]
   resettlementSummaries: [ResettlementSummary]
+
+  # Queries with filters
+  dashboardSummariesByYear(year: Int!): [DashboardSummary]
+  asylumRequestsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumRequest]
 }
