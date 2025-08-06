@@ -18,4 +18,8 @@ public class DashboardSummaryService {
     public List<DashboardSummary> findAll() {
         return dashboardSummaryRepository.findAll();
     }
+
+    public List<DashboardSummary> findByYear(int year) {
+        return dashboardSummaryRepository.findByYear(year);
+    }
 }

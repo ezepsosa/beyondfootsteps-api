@@ -83,7 +83,7 @@
                         </goals>
                         <configuration>
                             <schemaPaths>
-                                <param>src/main/resources/graphql-client</param>
+                                <param>src/main/resources/graphql</param>
                             </schemaPaths>
                             <packageName>com.beyondfootsteps.beyondfootsteps.codegen</packageName>
                             <addGeneratedAnnotation>true</addGeneratedAnnotation>

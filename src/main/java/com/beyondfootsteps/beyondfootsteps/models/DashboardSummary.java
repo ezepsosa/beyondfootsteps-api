@@ -24,6 +24,8 @@ public class DashboardSummary {
 
     private String countryIso;
 
+    private String country;
+
     private Integer totalApplied;
 
     @Column(name = "applied_per_100k")
