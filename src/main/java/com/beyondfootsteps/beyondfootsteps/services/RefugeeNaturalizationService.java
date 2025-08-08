@@ -18,4 +18,8 @@ public class RefugeeNaturalizationService {
     public List<RefugeeNaturalization> findAll() {
         return refugeeNaturalizationRepository.findAll();
     }
+
+    public List<RefugeeNaturalization> findByYearAndCountry(int year, String countryOfOriginIso, String countryOfAsylumIso) {
+        return refugeeNaturalizationRepository.findByYearAndCountries(year, countryOfOriginIso, countryOfAsylumIso);
+    }
 }

@@ -11,7 +11,7 @@ type AsylumDecision {
   decClosed: Int
   decTotal: Int
   acceptanceRate: Float
-  intakeDate: Int
+  decPc: Boolean
 }
 
 type AsylumRequest {
@@ -109,4 +109,6 @@ type Query {
   # Queries with filters
   dashboardSummariesByYear(year: Int!): [DashboardSummary]
   asylumRequestsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumRequest]
+  asylumDecisionsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumDecision]
+  refugeeNaturalizationsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [RefugeeNaturalization]
 }
