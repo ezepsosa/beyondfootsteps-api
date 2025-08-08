@@ -41,5 +41,5 @@ public class AsylumDecision {
 
     private Float acceptanceRate;
 
-    private Integer intakeDate;
+    private Boolean decPc;
 }

@@ -2,6 +2,7 @@ package com.beyondfootsteps.beyondfootsteps.resolvers;
 
 import java.util.List;
 
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -19,6 +20,13 @@ public class RefugeeNaturalizationResolver {
     @QueryMapping(name = "refugeeNaturalizations")
     public List<RefugeeNaturalization> findAll() {
         return refugeeNaturalizationService.findAll();
+    }
+
+    @QueryMapping(name = "refugeeNaturalizationsByYearAndCountry")
+    public List<RefugeeNaturalization> findByYearAndCountry(@Argument int year, @Argument String countryOfOriginIso,
+            @Argument String countryOfAsylumIso) throws Exception {
+        return refugeeNaturalizationService.findByYearAndCountry(year, countryOfOriginIso, countryOfAsylumIso);
+
     }
 
 }

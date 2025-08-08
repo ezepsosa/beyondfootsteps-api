@@ -18,4 +18,8 @@ public class AsylumDecisionService {
     public List<AsylumDecision> findAll() {
         return asylumDecisionRepository.findAll();
     }
+
+    public List<AsylumDecision> findByYearAndCountry(int year, String countryOfOriginIso, String countryOfAsylumIso) {
+        return asylumDecisionRepository.findByYearAndCountries(year, countryOfOriginIso, countryOfAsylumIso);
+    }
 }
