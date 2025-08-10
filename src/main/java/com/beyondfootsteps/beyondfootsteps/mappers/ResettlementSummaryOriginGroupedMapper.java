@@ -10,7 +10,8 @@ public class ResettlementSummaryOriginGroupedMapper {
 
     public static ResettlementSummaryOriginGroupedResponse toResponse(ResettlementSummaryOriginGroupedInternal internal) {
         return new ResettlementSummaryOriginGroupedResponse(
-                internal.countryOfOriginIso(),
+                internal.countriesIso(),
+                internal.countriesNames(),
                 internal.totalCases() != null ? internal.totalCases().intValue() : null,
                 internal.totalDepartures() != null ? internal.totalDepartures().intValue() : null,
                 internal.totalPersons() != null ? internal.totalPersons().intValue() : null,

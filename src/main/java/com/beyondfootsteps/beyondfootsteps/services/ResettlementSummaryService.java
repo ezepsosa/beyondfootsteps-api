@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
+import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
+import com.beyondfootsteps.beyondfootsteps.mappers.ResettlementSummaryOriginGroupedMapper;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 import com.beyondfootsteps.beyondfootsteps.repositories.ResettlementSummaryRepository;
 
@@ -20,8 +22,20 @@ public class ResettlementSummaryService {
         return resettlementSummaryRepository.findAll();
     }
 
-    public List<ResettlementSummaryOriginGroupedInternal> findByYearGroupedBy(int year, String grouping) {
-        return resettlementSummaryRepository.findByYearGroupedByOriginCountry(year);
+    public List<ResettlementSummaryOriginGroupedResponse> findByYearGroupedBy(int year, String grouping) {
+        List<ResettlementSummaryOriginGroupedInternal> res = List.of();
+        switch (grouping.toUpperCase()) {
+            case "ORIGIN" ->
+                res = resettlementSummaryRepository.findByYearGroupedByOriginCountry(year);
+            case "ASYLUM" ->
+                res = resettlementSummaryRepository.findByYearGroupedByAsylumCountry(year);
+            case "RESETTLEMENT" ->
+                res = resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year);
+            case "ORIGIN-ASYLUM" ->
+                res = resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year);
+            default -> {
+            }
+        }
+        return res.stream().map(ResettlementSummaryOriginGroupedMapper::toResponse).toList();
     }
-
 }

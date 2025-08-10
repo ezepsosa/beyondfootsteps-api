@@ -104,7 +104,8 @@ type ResettlementSummary {
 }
 
 type ResettlementSummaryGrouped {
-  groupedBy: String
+  countriesIso: String
+  countriesNames: String
   totalCases: Int
   totalDepartures: Int
   totalPersons: Int
@@ -145,6 +146,6 @@ type Query {
   ): [RefugeeNaturalization]
   resettlementSummariesByYearGroupedBy(
     year: Int!
-    grouping: String
+    grouping: String!
   ): [ResettlementSummaryGrouped]
 }

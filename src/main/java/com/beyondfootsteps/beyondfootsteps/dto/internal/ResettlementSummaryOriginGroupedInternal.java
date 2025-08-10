@@ -1,7 +1,8 @@
 package com.beyondfootsteps.beyondfootsteps.dto.internal;
 
 public record ResettlementSummaryOriginGroupedInternal(
-        String countryOfOriginIso,
+        String countriesIso,
+        String countriesNames,
         Number totalCases,
         Number totalDepartures,
         Number totalPersons,

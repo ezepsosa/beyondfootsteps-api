@@ -1,7 +1,8 @@
 package com.beyondfootsteps.beyondfootsteps.dto.response;
 
 public record ResettlementSummaryOriginGroupedResponse(
-        String groupedBy,
+        String countriesIso,
+        String countriesNames,
         Integer totalCases,
         Integer totalDepartures,
         Integer totalPersons,
