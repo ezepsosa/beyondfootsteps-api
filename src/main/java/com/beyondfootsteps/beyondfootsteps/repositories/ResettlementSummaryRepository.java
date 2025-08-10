@@ -76,4 +76,20 @@ public interface ResettlementSummaryRepository extends JpaRepository<Resettlemen
             + "FROM ResettlementSummary rssm WHERE rssm.year = :year GROUP BY rssm.countryOfOriginIso, rssm.countryOfAsylumIso, countryOfOrigin, countryOfAsylum")
     List<ResettlementSummaryOriginGroupedInternal> findByYearGroupedByOriginAsylumCountry(int year);
 
+    @Query("SELECT new com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal("
+            + "CONCAT(rssm.countryOfAsylumIso, '-',  rssm.countryOfResettlementIso), "
+            + "CONCAT(rssm.countryOfAsylum, '-',  rssm.countryOfResettlement), "
+            + "SUM(rssm.cases), "
+            + "SUM(rssm.departuresTotal), "
+            + "SUM(rssm.persons), "
+            + "SUM(rssm.totalNeeds), "
+            + "SUM(rssm.submissionsTotal), "
+            + "COALESCE(CASE WHEN SUM(rssm.totalNeeds) > 0 THEN ROUND(SUM(rssm.departuresTotal) * 1.0 / SUM(rssm.totalNeeds), 3) ELSE NULL END, NULL), "
+            + "COALESCE(SUM(rssm.totalNeeds) - SUM(rssm.departuresTotal), NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.totalNeeds) > 0 THEN ROUND(SUM(rssm.persons) * 1.0 / SUM(rssm.totalNeeds), 3) END, NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.submissionsTotal) > 0 THEN ROUND(SUM(rssm.persons) * 1.0 / SUM(rssm.submissionsTotal), 3) END, NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.submissionsTotal) > 0 THEN ROUND(SUM(rssm.departuresTotal) * 1.0 / SUM(rssm.submissionsTotal), 3) END, NULL)) "
+            + "FROM ResettlementSummary rssm WHERE rssm.year = :year GROUP BY rssm.countryOfAsylumIso, rssm.countryOfResettlementIso, countryOfAsylum, countryOfResettlement")
+    List<ResettlementSummaryOriginGroupedInternal> findByYearGroupedByAsylumResettlementCountry(int year);
+
 }

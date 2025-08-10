@@ -33,6 +33,8 @@ public class ResettlementSummaryService {
                 res = resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year);
             case "ORIGIN-ASYLUM" ->
                 res = resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year);
+            case "ASYLUM-RESETTLEMENT" ->
+                res = resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year);
             default -> {
             }
         }
