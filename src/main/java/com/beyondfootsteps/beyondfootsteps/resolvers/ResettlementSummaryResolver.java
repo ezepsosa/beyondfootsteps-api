@@ -7,6 +7,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
+import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 import com.beyondfootsteps.beyondfootsteps.services.ResettlementSummaryService;
 
@@ -26,6 +27,11 @@ public class ResettlementSummaryResolver {
     @QueryMapping(name = "resettlementSummariesByYearGroupedBy")
     public List<ResettlementSummaryOriginGroupedResponse> findByYearGroupedBy(@Argument int year, @Argument String grouping) {
         return resettlementSummaryService.findByYearGroupedBy(year, grouping);
+    }
+
+    @QueryMapping(name = "resettlementSummariesGroupedByAsylumYear")
+    public List<ResettlementSummaryOriginGroupedYearResponse> findGroupedByYear() {
+        return resettlementSummaryService.findGroupedByYear();
     }
 
 }

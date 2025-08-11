@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
+import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
 import com.beyondfootsteps.beyondfootsteps.mappers.ResettlementSummaryOriginGroupedMapper;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 import com.beyondfootsteps.beyondfootsteps.repositories.ResettlementSummaryRepository;
@@ -39,5 +40,9 @@ public class ResettlementSummaryService {
             }
         }
         return res.stream().map(ResettlementSummaryOriginGroupedMapper::toResponse).toList();
+    }
+
+    public List<ResettlementSummaryOriginGroupedYearResponse> findGroupedByYear() {
+        return resettlementSummaryRepository.findGroupedByYearAndAsylumCountry().stream().map(ResettlementSummaryOriginGroupedMapper::toResponseWithYear).toList();
     }
 }

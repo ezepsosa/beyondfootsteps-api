@@ -118,6 +118,22 @@ type ResettlementSummaryGrouped {
   realizationRate: Float
 }
 
+type ResettlementSummaryGroupedWithYear {
+  countriesIso: String
+  countriesNames: String
+  totalCases: Int
+  totalDepartures: Int
+  totalPersons: Int
+  year: Int
+  totalNeeds: Int
+  totalSubmissions: Int
+  coverageRate: Float
+  resettlementGap: Float
+  requestVsNeedsRatio: Float
+  submissionsEfficiency: Float
+  realizationRate: Float
+}
+
 type Query {
   asylumDecisions: [AsylumDecision]
   asylumRequests: [AsylumRequest]
@@ -126,6 +142,7 @@ type Query {
   idpReturnees: [IdpReturnees]
   refugeeNaturalizations: [RefugeeNaturalization]
   resettlementSummaries: [ResettlementSummary]
+  resettlementSummariesGroupedByAsylumYear: [ResettlementSummaryGroupedWithYear]
 
   # Queries with filters
   dashboardSummariesByYear(year: Int!): [DashboardSummary]
@@ -148,4 +165,5 @@ type Query {
     year: Int!
     grouping: String!
   ): [ResettlementSummaryGrouped]
+
 }

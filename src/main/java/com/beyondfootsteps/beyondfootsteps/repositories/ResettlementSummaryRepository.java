@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 
@@ -91,5 +92,22 @@ public interface ResettlementSummaryRepository extends JpaRepository<Resettlemen
             + "COALESCE(CASE WHEN SUM(rssm.submissionsTotal) > 0 THEN ROUND(SUM(rssm.departuresTotal) * 1.0 / SUM(rssm.submissionsTotal), 3) END, NULL)) "
             + "FROM ResettlementSummary rssm WHERE rssm.year = :year GROUP BY rssm.countryOfAsylumIso, rssm.countryOfResettlementIso, countryOfAsylum, countryOfResettlement")
     List<ResettlementSummaryOriginGroupedInternal> findByYearGroupedByAsylumResettlementCountry(int year);
+
+    @Query("SELECT new com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal("
+            + "rssm.countryOfAsylumIso,"
+            + "rssm.countryOfAsylum, "
+            + "SUM(rssm.cases), "
+            + "SUM(rssm.departuresTotal), "
+            + "SUM(rssm.persons), "
+            + "SUM(rssm.totalNeeds), "
+            + "SUM(rssm.submissionsTotal), "
+            + "rssm.year,"
+            + "COALESCE(CASE WHEN SUM(rssm.totalNeeds) > 0 THEN ROUND(SUM(rssm.departuresTotal) * 1.0 / SUM(rssm.totalNeeds), 3) ELSE NULL END, NULL), "
+            + "COALESCE(SUM(rssm.totalNeeds) - SUM(rssm.departuresTotal), NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.totalNeeds) > 0 THEN ROUND(SUM(rssm.persons) * 1.0 / SUM(rssm.totalNeeds), 3) END, NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.submissionsTotal) > 0 THEN ROUND(SUM(rssm.persons) * 1.0 / SUM(rssm.submissionsTotal), 3) END, NULL), "
+            + "COALESCE(CASE WHEN SUM(rssm.submissionsTotal) > 0 THEN ROUND(SUM(rssm.departuresTotal) * 1.0 / SUM(rssm.submissionsTotal), 3) END, NULL)) "
+            + "FROM ResettlementSummary rssm GROUP BY rssm.countryOfAsylumIso, rssm.countryOfAsylum, rssm.year")
+    List<ResettlementSummaryGroupedByAsylumAndYearInternal> findGroupedByYearAndAsylumCountry();
 
 }

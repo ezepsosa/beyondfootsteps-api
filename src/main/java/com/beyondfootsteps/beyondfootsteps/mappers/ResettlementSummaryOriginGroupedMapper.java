@@ -1,7 +1,9 @@
 package com.beyondfootsteps.beyondfootsteps.mappers;
 
+import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
+import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
 
 public class ResettlementSummaryOriginGroupedMapper {
 
@@ -22,6 +24,24 @@ public class ResettlementSummaryOriginGroupedMapper {
                 internal.requestVsNeedsRatio() != null ? internal.requestVsNeedsRatio().doubleValue() : null,
                 internal.submissionsEfficiency() != null ? internal.submissionsEfficiency().floatValue() : null,
                 internal.realizationRate() != null ? internal.realizationRate().doubleValue() : null
+        );
+    }
+
+    public static ResettlementSummaryOriginGroupedYearResponse toResponseWithYear(ResettlementSummaryGroupedByAsylumAndYearInternal internal) {
+        return new ResettlementSummaryOriginGroupedYearResponse(
+                internal.countriesIso(),
+                internal.countriesNames(),
+                internal.totalCases() != null ? internal.totalCases().intValue() : null,
+                internal.totalDepartures() != null ? internal.totalDepartures().intValue() : null,
+                internal.totalPersons() != null ? internal.totalPersons().intValue() : null,
+                internal.totalNeeds() != null ? internal.totalNeeds().intValue() : null,
+                internal.totalSubmissions() != null ? internal.totalSubmissions().intValue() : null,
+                internal.coverageRate() != null ? internal.coverageRate().doubleValue() : null,
+                internal.resettlementGap() != null ? internal.resettlementGap().doubleValue() : null,
+                internal.requestVsNeedsRatio() != null ? internal.requestVsNeedsRatio().doubleValue() : null,
+                internal.submissionsEfficiency() != null ? internal.submissionsEfficiency().floatValue() : null,
+                internal.realizationRate() != null ? internal.realizationRate().doubleValue() : null,
+                internal.year() != null ? internal.year().intValue() : null
         );
     }
 
