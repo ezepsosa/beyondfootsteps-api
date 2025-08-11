@@ -85,13 +85,50 @@ type RefugeeNaturalization {
 type ResettlementSummary {
   id: ID!
   year: Int
-  countryIso: String
-  totalRequests: Int
-  totalDepartures: Int
-  totalSubmissions: Int
+  countryOfOriginIso: String
+  countryOfOrigin: String
+  countryOfAsylumIso: String
+  countryOfAsylum: String
+  countryOfResettlementIso: String
+  countryOfResettlement: String
+  cases: Int
+  persons: Int
+  departuresTotal: Int
   totalNeeds: Int
-  totalGaps: Float
+  submissionsTotal: Int
+  resettlementGap: Float
   coverageRate: Float
+  requestVsNeedsRatio: Float
+  submissionsEfficiency: Float
+  realizationRate: Float
+}
+
+type ResettlementSummaryGrouped {
+  countriesIso: String
+  countriesNames: String
+  totalCases: Int
+  totalDepartures: Int
+  totalPersons: Int
+  totalNeeds: Int
+  totalSubmissions: Int
+  coverageRate: Float
+  resettlementGap: Float
+  requestVsNeedsRatio: Float
+  submissionsEfficiency: Float
+  realizationRate: Float
+}
+
+type ResettlementSummaryGroupedWithYear {
+  countriesIso: String
+  countriesNames: String
+  totalCases: Int
+  totalDepartures: Int
+  totalPersons: Int
+  year: Int
+  totalNeeds: Int
+  totalSubmissions: Int
+  coverageRate: Float
+  resettlementGap: Float
   requestVsNeedsRatio: Float
   submissionsEfficiency: Float
   realizationRate: Float
@@ -105,10 +142,28 @@ type Query {
   idpReturnees: [IdpReturnees]
   refugeeNaturalizations: [RefugeeNaturalization]
   resettlementSummaries: [ResettlementSummary]
+  resettlementSummariesGroupedByAsylumYear: [ResettlementSummaryGroupedWithYear]
 
   # Queries with filters
   dashboardSummariesByYear(year: Int!): [DashboardSummary]
-  asylumRequestsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumRequest]
-  asylumDecisionsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [AsylumDecision]
-  refugeeNaturalizationsByYearAndCountry(year: Int!, countryOfOriginIso: String, countryOfAsylumIso: String): [RefugeeNaturalization]
+  asylumRequestsByYearAndCountry(
+    year: Int!
+    countryOfOriginIso: String
+    countryOfAsylumIso: String
+  ): [AsylumRequest]
+  asylumDecisionsByYearAndCountry(
+    year: Int!
+    countryOfOriginIso: String
+    countryOfAsylumIso: String
+  ): [AsylumDecision]
+  refugeeNaturalizationsByYearAndCountry(
+    year: Int!
+    countryOfOriginIso: String
+    countryOfAsylumIso: String
+  ): [RefugeeNaturalization]
+  resettlementSummariesByYearGroupedBy(
+    year: Int!
+    grouping: String!
+  ): [ResettlementSummaryGrouped]
+
 }
