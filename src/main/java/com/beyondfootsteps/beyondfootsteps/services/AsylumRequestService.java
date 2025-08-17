@@ -22,7 +22,7 @@ public class AsylumRequestService {
 
     private final AsylumRequestRepository asylumRequestRepository;
 
-    private final Logger logger = Logger.getLogger(AsylumRequestService.class.getName());
+    private static final Logger logger = Logger.getLogger(AsylumRequestService.class.getName());
 
     /**
      * Retrieves all asylum requests from the repository.
