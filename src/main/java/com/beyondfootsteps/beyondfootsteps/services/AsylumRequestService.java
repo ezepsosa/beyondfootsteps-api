@@ -1,10 +1,12 @@
 package com.beyondfootsteps.beyondfootsteps.services;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
 
+import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
 import com.beyondfootsteps.beyondfootsteps.models.AsylumRequest;
 import com.beyondfootsteps.beyondfootsteps.repositories.AsylumRequestRepository;
 
@@ -41,6 +43,13 @@ public class AsylumRequestService {
      * @return a list of asylum decisions matching the criteria
      */
     public List<AsylumRequest> findByYearAndCountry(int year, String countryOfOriginIso, String countryOfAsylumIso) {
+        if (countryOfOriginIso == null && countryOfAsylumIso == null) {
+            logger.warning("Both countryOfOriginIso and countryOfAsylumIso are null");
+            throw new InvalidParamException("At least one country must be provided");
+        }
+        logger.log(Level.INFO, "Finding asylum requests for year: {0}, countryOfOrigin {1} and countryOfAsylum: {2}", new Object[]{year, countryOfOriginIso, countryOfAsylumIso
+        }
+        );
         return asylumRequestRepository.findByYearAndCountries(year, countryOfOriginIso, countryOfAsylumIso);
     }
 }
