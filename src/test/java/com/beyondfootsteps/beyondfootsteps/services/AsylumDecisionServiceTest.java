@@ -1,8 +1,8 @@
 package com.beyondfootsteps.beyondfootsteps.services;
 
-import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,9 +31,31 @@ class AsylumDecisionServiceTest {
 
     @Test
     void shouldFindAllAndReturnList() {
-        when(asylumDecisionRepository.findAll()).thenReturn(Collections.emptyList());
+        AsylumDecision decision = new AsylumDecision();
+        decision.setId("test-id");
+        decision.setYear(2025);
+        decision.setCountryOfOrigin("Afghanistan");
+        decision.setCountryOfOriginIso("AFG");
+        decision.setCountryOfAsylum("Spain");
+        decision.setCountryOfAsylumIso("ESP");
+        decision.setDecRecognized(100);
+        decision.setDecOther(20);
+        decision.setDecRejected(30);
+        decision.setDecClosed(10);
+        decision.setDecTotal(160);
+        decision.setAcceptanceRate(0.75f);
+        decision.setDecPc(true);
+
+        when(asylumDecisionRepository.findAll()).thenReturn(List.of(decision));
+
         List<AsylumDecision> result = asylumDecisionService.findAll();
+
         assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(2025, result.get(0).getYear());
+        assertEquals("Afghanistan", result.get(0).getCountryOfOrigin());
+        assertEquals("Spain", result.get(0).getCountryOfAsylum());
+
     }
 
     @ParameterizedTest
@@ -43,9 +65,29 @@ class AsylumDecisionServiceTest {
         "2025, ESP, "
     })
     void shouldFindByYearAndCountry(int year, String originCountry, String asylumCountry) {
-        when(asylumDecisionRepository.findByYearAndCountries(year, originCountry, asylumCountry)).thenReturn(Collections.emptyList());
+        AsylumDecision decision = new AsylumDecision();
+        decision.setId("test-id");
+        decision.setYear(year);
+        decision.setCountryOfOrigin("Afghanistan");
+        decision.setCountryOfOriginIso(originCountry != null ? originCountry : "AFG");
+        decision.setCountryOfAsylum("Spain");
+        decision.setCountryOfAsylumIso(asylumCountry != null ? asylumCountry : "ESP");
+        decision.setDecRecognized(100);
+        decision.setDecOther(20);
+        decision.setDecRejected(30);
+        decision.setDecClosed(10);
+        decision.setDecTotal(160);
+        decision.setAcceptanceRate(0.75f);
+        decision.setDecPc(true);
+
+        when(asylumDecisionRepository.findByYearAndCountries(year, originCountry, asylumCountry))
+                .thenReturn(List.of(decision));
+
         List<AsylumDecision> result = asylumDecisionService.findByYearAndCountry(year, originCountry, asylumCountry);
+
         assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(year, result.get(0).getYear());
     }
 
     @Test
@@ -53,5 +95,6 @@ class AsylumDecisionServiceTest {
         InvalidParamException exception = assertThrows(InvalidParamException.class,
                 () -> asylumDecisionService.findByYearAndCountry(2025, null, null));
         assertNotNull(exception.getMessage());
+        assertEquals("At least one country must be provided", exception.getMessage());
     }
 }

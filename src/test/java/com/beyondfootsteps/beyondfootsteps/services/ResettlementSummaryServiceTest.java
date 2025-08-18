@@ -1,8 +1,8 @@
 package com.beyondfootsteps.beyondfootsteps.services;
 
-import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +13,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal;
+import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
 import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
@@ -30,20 +32,43 @@ class ResettlementSummaryServiceTest {
         resettlementSummaryRepository = mock(ResettlementSummaryRepository.class);
         resettlementSummaryService = new ResettlementSummaryService(resettlementSummaryRepository);
         int year = 2025;
-        when(resettlementSummaryRepository.findByYearGroupedByOriginCountry(year)).thenReturn(Collections.emptyList());
-        when(resettlementSummaryRepository.findByYearGroupedByAsylumCountry(year)).thenReturn(Collections.emptyList());
-        when(resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year)).thenReturn(Collections.emptyList());
-        when(resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year)).thenReturn(Collections.emptyList());
-        when(resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year)).thenReturn(Collections.emptyList());
+
+        ResettlementSummary summary = new ResettlementSummary("test-id", 2025, "AFG", "Afghanistan", "ESP", "Spain", "USA", "United States", 100, 120, 80, 150, 90, 60, 0.75f, 0.60f, 0.80f, 0.85f);
+        ResettlementSummaryOriginGroupedInternal internal = new ResettlementSummaryOriginGroupedInternal("AFG", "Afghanistan", 100, 80, 120, 150, 90, 0.75, 60.0, 0.60, 0.80f, 0.85);
+        when(resettlementSummaryRepository.findAll()).thenReturn(List.of(summary));
+        when(resettlementSummaryRepository.findByYearGroupedByOriginCountry(year)).thenReturn(List.of(internal));
+        when(resettlementSummaryRepository.findByYearGroupedByAsylumCountry(year)).thenReturn(List.of(internal));
+        when(resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year)).thenReturn(List.of(internal));
+        when(resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year)).thenReturn(List.of(internal));
+        when(resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year)).thenReturn(List.of(internal));
+        ResettlementSummaryGroupedByAsylumAndYearInternal internalYear = new ResettlementSummaryGroupedByAsylumAndYearInternal("AFG", "Afghanistan", 100, 80, 120, 150, 90, 2025, 0.75, 60.0, 0.60, 0.80f, 0.85);
+        when(resettlementSummaryRepository.findGroupedByYearAndAsylumCountry()).thenReturn(List.of(internalYear));
 
     }
-    
 
     @Test
     void shouldFindAllAndReturnList() {
-        when(resettlementSummaryRepository.findAll()).thenReturn(Collections.emptyList());
         List<ResettlementSummary> result = resettlementSummaryService.findAll();
         assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("test-id", result.get(0).getId());
+        assertEquals(2025, result.get(0).getYear());
+        assertEquals("AFG", result.get(0).getCountryOfOriginIso());
+        assertEquals("Afghanistan", result.get(0).getCountryOfOrigin());
+        assertEquals("ESP", result.get(0).getCountryOfAsylumIso());
+        assertEquals("Spain", result.get(0).getCountryOfAsylum());
+        assertEquals("USA", result.get(0).getCountryOfResettlementIso());
+        assertEquals("United States", result.get(0).getCountryOfResettlement());
+        assertEquals(100, result.get(0).getCases());
+        assertEquals(120, result.get(0).getPersons());
+        assertEquals(80, result.get(0).getDeparturesTotal());
+        assertEquals(150, result.get(0).getTotalNeeds());
+        assertEquals(90, result.get(0).getSubmissionsTotal());
+        assertEquals(60, result.get(0).getResettlementGap());
+        assertEquals(0.75f, result.get(0).getCoverageRate());
+        assertEquals(0.60f, result.get(0).getRequestVsNeedsRatio());
+        assertEquals(0.80f, result.get(0).getSubmissionsEfficiency());
+        assertEquals(0.85f, result.get(0).getRealizationRate());
     }
 
     @ParameterizedTest
@@ -56,6 +81,18 @@ class ResettlementSummaryServiceTest {
     void shouldFindByYearGroupedBy(int year, String grouping) {
         List<ResettlementSummaryOriginGroupedResponse> result = resettlementSummaryService.findByYearGroupedBy(year, grouping);
         assertNotNull(result);
+
+        assertEquals(1, result.size());
+        assertEquals(100, result.get(0).totalCases());
+        assertEquals(80, result.get(0).totalDepartures());
+        assertEquals(120, result.get(0).totalPersons());
+        assertEquals(150, result.get(0).totalNeeds());
+        assertEquals(90, result.get(0).totalSubmissions());
+        assertEquals(0.75, result.get(0).coverageRate());
+        assertEquals(60.0, result.get(0).resettlementGap());
+        assertEquals(0.60, result.get(0).requestVsNeedsRatio());
+        assertEquals(0.80f, result.get(0).submissionsEfficiency());
+        assertEquals(0.85, result.get(0).realizationRate());
     }
 
     @ParameterizedTest
@@ -66,12 +103,24 @@ class ResettlementSummaryServiceTest {
         InvalidParamException exception = assertThrows(InvalidParamException.class,
                 () -> resettlementSummaryService.findByYearGroupedBy(2025, null));
         assertNotNull(exception.getMessage());
+        assertEquals("Grouping is null or is not one of the valid values [ORIGIN, ASYLUM, RESETTLEMENT, ORIGIN-ASYLUM, ASYLUM-RESETTLEMENT]", exception.getMessage());
     }
 
     @Test
     void shouldFindGroupedByYear() {
-        when(resettlementSummaryRepository.findGroupedByYearAndAsylumCountry()).thenReturn(Collections.emptyList());
         List<ResettlementSummaryOriginGroupedYearResponse> result = resettlementSummaryService.findGroupedByYear();
         assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(100, result.get(0).totalCases());
+        assertEquals(80, result.get(0).totalDepartures());
+        assertEquals(120, result.get(0).totalPersons());
+        assertEquals(150, result.get(0).totalNeeds());
+        assertEquals(90, result.get(0).totalSubmissions());
+        assertEquals(0.75, result.get(0).coverageRate());
+        assertEquals(60.0, result.get(0).resettlementGap());
+        assertEquals(0.60, result.get(0).requestVsNeedsRatio());
+        assertEquals(0.80f, result.get(0).submissionsEfficiency());
+        assertEquals(0.85, result.get(0).realizationRate());
+        assertEquals(2025, result.get(0).year());
     }
 }
