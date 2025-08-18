@@ -48,9 +48,7 @@ public class AsylumRequestService {
             logger.warning("Both countryOfOriginIso and countryOfAsylumIso are null");
             throw new InvalidParamException("At least one country must be provided");
         }
-        logger.log(Level.INFO, "Finding asylum requests for year: {0}, countryOfOrigin {1} and countryOfAsylum: {2}", new Object[]{year, countryOfOriginIso, countryOfAsylumIso
-        }
-        );
+        logger.log(Level.INFO, "Finding asylum requests for year: {0}, countryOfOrigin {1} and countryOfAsylum: {2}", new Object[]{year, countryOfOriginIso, countryOfAsylumIso});
         return asylumRequestRepository.findByYearAndCountries(year, countryOfOriginIso, countryOfAsylumIso);
     }
 }
