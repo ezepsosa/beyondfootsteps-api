@@ -30,6 +30,7 @@ public class AsylumRequestService {
      * @return a list of asylum requests
      */
     public List<AsylumRequest> findAll() {
+        logger.info("Finding all asylum requests");
         return asylumRequestRepository.findAll();
     }
 
