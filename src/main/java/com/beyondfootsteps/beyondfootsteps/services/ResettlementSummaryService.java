@@ -68,10 +68,8 @@ public class ResettlementSummaryService {
                 res = resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year);
             case "ORIGIN-ASYLUM" ->
                 res = resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year);
-            case "ASYLUM-RESETTLEMENT" ->
+            default ->
                 res = resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year);
-            default -> {
-            }
         }
         logger.log(Level.INFO, "Mapping resettlement summaries");
         return res.stream().map(ResettlementSummaryOriginGroupedMapper::toResponse).toList();

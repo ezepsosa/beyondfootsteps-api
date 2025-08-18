@@ -81,7 +81,6 @@ class ResettlementSummaryServiceTest {
     void shouldFindByYearGroupedBy(int year, String grouping) {
         List<ResettlementSummaryOriginGroupedResponse> result = resettlementSummaryService.findByYearGroupedBy(year, grouping);
         assertNotNull(result);
-
         assertEquals(1, result.size());
         assertEquals(100, result.get(0).totalCases());
         assertEquals(80, result.get(0).totalDepartures());
@@ -98,10 +97,10 @@ class ResettlementSummaryServiceTest {
     @ParameterizedTest
     @CsvSource({
         "2025, ",
-        "2025, not-valid",})
-    void shouldNotFindByYearGroupedBy() {
+        "2025, not-valid"})
+    void shouldNotFindByYearGroupedBy(Integer year, String grouping) {
         InvalidParamException exception = assertThrows(InvalidParamException.class,
-                () -> resettlementSummaryService.findByYearGroupedBy(2025, null));
+                () -> resettlementSummaryService.findByYearGroupedBy(year, grouping));
         assertNotNull(exception.getMessage());
         assertEquals("Grouping is null or is not one of the valid values [ORIGIN, ASYLUM, RESETTLEMENT, ORIGIN-ASYLUM, ASYLUM-RESETTLEMENT]", exception.getMessage());
     }
