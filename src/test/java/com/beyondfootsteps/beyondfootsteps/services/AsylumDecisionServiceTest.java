@@ -42,14 +42,14 @@ class AsylumDecisionServiceTest {
         "2025, ,AFG",
         "2025, ESP, "
     })
-    void shouldFindByYearAndOrigin(int year, String originCountry, String asylumCountry) {
+    void shouldFindByYearAndCountry(int year, String originCountry, String asylumCountry) {
         when(asylumDecisionRepository.findByYearAndCountries(year, originCountry, asylumCountry)).thenReturn(Collections.emptyList());
         List<AsylumDecision> result = asylumDecisionService.findByYearAndCountry(year, originCountry, asylumCountry);
         assertNotNull(result);
     }
 
     @Test
-    void shouldNotFindByYearAndOrigin() {
+    void shouldNotFindByYearAndCountry() {
         InvalidParamException exception = assertThrows(InvalidParamException.class,
                 () -> asylumDecisionService.findByYearAndCountry(2025, null, null));
         assertNotNull(exception.getMessage());
