@@ -22,6 +22,7 @@ public class IdpReturnees {
     @Id
     private String id;
 
+    @Column(name = "\"year\"")
     private Integer year;
 
     private String countryOfOriginIso;
