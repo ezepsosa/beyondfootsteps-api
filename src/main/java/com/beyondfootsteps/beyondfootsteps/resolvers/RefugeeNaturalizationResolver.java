@@ -24,7 +24,7 @@ public class RefugeeNaturalizationResolver {
 
     @QueryMapping(name = "refugeeNaturalizationsByYearAndCountry")
     public List<RefugeeNaturalization> findByYearAndCountry(@Argument int year, @Argument String countryOfOriginIso,
-            @Argument String countryOfAsylumIso) throws Exception {
+            @Argument String countryOfAsylumIso) {
         return refugeeNaturalizationService.findByYearAndCountry(year, countryOfOriginIso, countryOfAsylumIso);
 
     }

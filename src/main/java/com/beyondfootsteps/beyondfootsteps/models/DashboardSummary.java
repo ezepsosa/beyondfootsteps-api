@@ -20,6 +20,7 @@ public class DashboardSummary {
     @Id
     private String id;
 
+    @Column(name = "\"year\"")
     private Integer year;
 
     private String countryIso;
