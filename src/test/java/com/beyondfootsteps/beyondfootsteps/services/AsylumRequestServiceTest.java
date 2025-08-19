@@ -6,29 +6,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static org.mockito.Mockito.mock;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.when;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
 import com.beyondfootsteps.beyondfootsteps.models.AsylumRequest;
 import com.beyondfootsteps.beyondfootsteps.repositories.AsylumRequestRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class AsylumRequestServiceTest {
 
+    @Mock
     private AsylumRequestRepository asylumRequestRepository;
+    @InjectMocks
     private AsylumRequestService asylumRequestService;
 
-    @BeforeEach
-    void setUp() {
-        asylumRequestRepository = mock(AsylumRequestRepository.class);
-        asylumRequestService = new AsylumRequestService(asylumRequestRepository);
-    }
 
     @Test
     void shouldFindAllAndReturnList() {

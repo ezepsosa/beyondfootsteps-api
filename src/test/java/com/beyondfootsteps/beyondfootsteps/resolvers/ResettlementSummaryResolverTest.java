@@ -5,12 +5,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedResponse;
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
@@ -18,17 +18,13 @@ import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 import com.beyondfootsteps.beyondfootsteps.services.ResettlementSummaryService;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ResettlementSummaryResolverTest {
 
+    @Mock
     private ResettlementSummaryService resettlementSummaryService;
+    @InjectMocks
     private ResettlementSummaryResolver resettlementSummaryResolver;
-
-    @BeforeEach
-    void setUp() {
-        resettlementSummaryService = mock(ResettlementSummaryService.class);
-        resettlementSummaryResolver = new ResettlementSummaryResolver(resettlementSummaryService);
-    }
 
     @Test
     void shouldFindAllResettlementSummaries() {

@@ -4,26 +4,23 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.when;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.models.IdpDisplacement;
 import com.beyondfootsteps.beyondfootsteps.repositories.IdpDisplacementRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class IdpDisplacementServiceTest {
 
+    @Mock
     private IdpDisplacementRepository idpDisplacementRepository;
+    @InjectMocks
     private IdpDisplacementService idpDisplacementService;
-
-    @BeforeEach
-    void setUp() {
-        idpDisplacementRepository = mock(IdpDisplacementRepository.class);
-        idpDisplacementService = new IdpDisplacementService(idpDisplacementRepository);
-    }
 
     @Test
     void shouldFindAllAndReturnList() {

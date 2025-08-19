@@ -7,11 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.lenient;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
@@ -21,28 +23,27 @@ import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
 import com.beyondfootsteps.beyondfootsteps.models.ResettlementSummary;
 import com.beyondfootsteps.beyondfootsteps.repositories.ResettlementSummaryRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ResettlementSummaryServiceTest {
 
+    @Mock
     private ResettlementSummaryRepository resettlementSummaryRepository;
+    @InjectMocks
     private ResettlementSummaryService resettlementSummaryService;
 
     @BeforeEach
     void setUp() {
-        resettlementSummaryRepository = mock(ResettlementSummaryRepository.class);
-        resettlementSummaryService = new ResettlementSummaryService(resettlementSummaryRepository);
         int year = 2025;
-
         ResettlementSummary summary = new ResettlementSummary("test-id", 2025, "AFG", "Afghanistan", "ESP", "Spain", "USA", "United States", 100, 120, 80, 150, 90, 60, 0.75f, 0.60f, 0.80f, 0.85f);
         ResettlementSummaryOriginGroupedInternal internal = new ResettlementSummaryOriginGroupedInternal("AFG", "Afghanistan", 100, 80, 120, 150, 90, 0.75, 60.0, 0.60, 0.80f, 0.85);
-        when(resettlementSummaryRepository.findAll()).thenReturn(List.of(summary));
-        when(resettlementSummaryRepository.findByYearGroupedByOriginCountry(year)).thenReturn(List.of(internal));
-        when(resettlementSummaryRepository.findByYearGroupedByAsylumCountry(year)).thenReturn(List.of(internal));
-        when(resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year)).thenReturn(List.of(internal));
-        when(resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year)).thenReturn(List.of(internal));
-        when(resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year)).thenReturn(List.of(internal));
+        lenient().when(resettlementSummaryRepository.findAll()).thenReturn(List.of(summary));
+        lenient().when(resettlementSummaryRepository.findByYearGroupedByOriginCountry(year)).thenReturn(List.of(internal));
+        lenient().when(resettlementSummaryRepository.findByYearGroupedByAsylumCountry(year)).thenReturn(List.of(internal));
+        lenient().when(resettlementSummaryRepository.findByYearGroupedByResettlementCountry(year)).thenReturn(List.of(internal));
+        lenient().when(resettlementSummaryRepository.findByYearGroupedByOriginAsylumCountry(year)).thenReturn(List.of(internal));
+        lenient().when(resettlementSummaryRepository.findByYearGroupedByAsylumResettlementCountry(year)).thenReturn(List.of(internal));
         ResettlementSummaryGroupedByAsylumAndYearInternal internalYear = new ResettlementSummaryGroupedByAsylumAndYearInternal("AFG", "Afghanistan", 100, 80, 120, 150, 90, 2025, 0.75, 60.0, 0.60, 0.80f, 0.85);
-        when(resettlementSummaryRepository.findGroupedByYearAndAsylumCountry()).thenReturn(List.of(internalYear));
+        lenient().when(resettlementSummaryRepository.findGroupedByYearAndAsylumCountry()).thenReturn(List.of(internalYear));
 
     }
 

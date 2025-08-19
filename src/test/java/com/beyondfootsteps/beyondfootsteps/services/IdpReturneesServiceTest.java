@@ -5,26 +5,24 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.when;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.models.IdpReturnees;
 import com.beyondfootsteps.beyondfootsteps.repositories.IdpReturneesRepository;
 
-@SpringBootTest
+
+@ExtendWith(MockitoExtension.class)
 class IdpReturneesServiceTest {
 
+    @Mock
     private IdpReturneesRepository idpReturneesRepository;
+    @InjectMocks
     private IdpReturneesService idpReturneesService;
-
-    @BeforeEach
-    void setUp() {
-        idpReturneesRepository = mock(IdpReturneesRepository.class);
-        idpReturneesService = new IdpReturneesService(idpReturneesRepository);
-    }
 
     @Test
     void shouldFindAllAndReturnList() {
