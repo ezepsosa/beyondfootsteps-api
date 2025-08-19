@@ -5,28 +5,24 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.exceptions.InvalidParamException;
 import com.beyondfootsteps.beyondfootsteps.models.AsylumDecision;
 import com.beyondfootsteps.beyondfootsteps.services.AsylumDecisionService;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class AsylumDecisionResolverTest {
 
+    @Mock
     private AsylumDecisionService asylumDecisionService;
+    @InjectMocks
     private AsylumDecisionResolver asylumDecisionResolver;
-
-    @BeforeEach
-    void setUp() {
-        asylumDecisionService = mock(AsylumDecisionService.class);
-        asylumDecisionResolver = new AsylumDecisionResolver(asylumDecisionService);
-    }
 
     @Test
     void shouldFindAllAsylumDecisions() {

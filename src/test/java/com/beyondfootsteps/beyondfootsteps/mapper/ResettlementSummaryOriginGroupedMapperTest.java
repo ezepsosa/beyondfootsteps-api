@@ -2,7 +2,6 @@ package com.beyondfootsteps.beyondfootsteps.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryGroupedByAsylumAndYearInternal;
 import com.beyondfootsteps.beyondfootsteps.dto.internal.ResettlementSummaryOriginGroupedInternal;
@@ -10,7 +9,6 @@ import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOrigi
 import com.beyondfootsteps.beyondfootsteps.dto.response.ResettlementSummaryOriginGroupedYearResponse;
 import com.beyondfootsteps.beyondfootsteps.mappers.ResettlementSummaryOriginGroupedMapper;
 
-@SpringBootTest
 class ResettlementSummaryOriginGroupedMapperTest {
 
     @Test

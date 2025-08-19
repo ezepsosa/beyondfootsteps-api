@@ -4,27 +4,23 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.models.DashboardSummary;
 import com.beyondfootsteps.beyondfootsteps.services.DashboardSummaryService;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class DashboardSummaryResolverTest {
 
+    @Mock
     private DashboardSummaryService dashboardSummaryService;
+    @InjectMocks
     private DashboardSummaryResolver dashboardSummaryResolver;
-
-    @BeforeEach
-    void setUp() {
-        dashboardSummaryService = mock(DashboardSummaryService.class);
-        dashboardSummaryResolver = new DashboardSummaryResolver(dashboardSummaryService);
-    }
 
     @Test
     void shouldFindAllDashboardSummaries() {

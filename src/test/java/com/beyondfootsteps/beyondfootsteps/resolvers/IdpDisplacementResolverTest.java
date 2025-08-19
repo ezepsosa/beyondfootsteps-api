@@ -4,27 +4,23 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.beyondfootsteps.beyondfootsteps.models.IdpDisplacement;
 import com.beyondfootsteps.beyondfootsteps.services.IdpDisplacementService;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class IdpDisplacementResolverTest {
 
+    @Mock
     private IdpDisplacementService idpDisplacementService;
+    @InjectMocks
     private IdpDisplacementResolver idpDisplacementResolver;
-
-    @BeforeEach
-    void setUp() {
-        idpDisplacementService = mock(IdpDisplacementService.class);
-        idpDisplacementResolver = new IdpDisplacementResolver(idpDisplacementService);
-    }
 
     @Test
     void shouldFindAllIdpDisplacements() {
