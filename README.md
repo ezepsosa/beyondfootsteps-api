@@ -71,11 +71,13 @@ This Spring Boot GraphQL API powers the Beyond Footsteps project by exposing mig
 
 ## Architecture
 
+
 ```mermaid
 flowchart LR
-    A[UNHCR Data Source] -->|ETL| B[(Database)]
-    B --> C[GraphQL API<br/>(Resolvers, Services, Repositories)]
-    C --> D[Frontend Client<br/>(React, Maps, Dashboards)]
+    A([UNHCR Statistics Portal]) --> B{{ETL: ingest • clean • normalize • derive metrics}}
+    B --> C[(DB)]
+    C --> D([GraphQL API<br/>Typed schema & resolvers])
+    D --> E([Client React<br/>Maps • Dashboards • Modals])
 ```
 
 *The API layer abstracts data retrieval and aggregation (e.g., grouping by country and year) to support the visualization of migration and refugee trends.*
@@ -327,7 +329,3 @@ Run all tests with:
 ## License
 
 MIT License – see the [LICENSE](LICENSE) file for details.
-
----
-
-This README covers the critical aspects of the project – from architecture and development configuration to testing and deployment using Docker. Enjoy exploring and extending the project!
