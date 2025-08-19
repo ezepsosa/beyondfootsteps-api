@@ -24,7 +24,7 @@ public class AsylumRequestResolver {
 
     @QueryMapping(name = "asylumRequestsByYearAndCountry")
     public List<AsylumRequest> findByYearAndCountry(@Argument int year, @Argument String countryOfOriginIso,
-            @Argument String countryOfAsylumIso) throws Exception {
+            @Argument String countryOfAsylumIso) {
         return asylumRequestService.findByYearAndCountry(year, countryOfOriginIso, countryOfAsylumIso);
 
     }

@@ -20,6 +20,7 @@ public class IdpDisplacement {
     @Id
     private String id;
 
+    @Column(name = "\"year\"")
     private Integer year;
 
     private String countryOfOrigin;
