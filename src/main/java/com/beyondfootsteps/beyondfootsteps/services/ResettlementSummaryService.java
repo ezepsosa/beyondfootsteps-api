@@ -53,7 +53,7 @@ public class ResettlementSummaryService {
      */
     public List<ResettlementSummaryOriginGroupedResponse> findByYearGroupedBy(int year, String grouping) {
         List<ResettlementSummaryOriginGroupedInternal> res = List.of();
-        if (grouping == null || !VALID_GROUPING.contains(grouping)) {
+        if (grouping == null || !VALID_GROUPING.contains(grouping.toUpperCase())) {
             logger.warning("Grouping is null or is not one of the valid entries");
             throw new InvalidParamException("Grouping is null or is not one of the valid values [ORIGIN, ASYLUM, RESETTLEMENT, ORIGIN-ASYLUM, ASYLUM-RESETTLEMENT]");
 
